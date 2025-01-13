@@ -20,7 +20,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="flex w-14 h-8 items-center justify-around rounded-full bg-[#2e2f33]">
+    <div className="flex h-8 w-14 items-center justify-around rounded-full bg-[#2e2f33]">
       <button
         onClick={() => toggleTheme("light")}
         className={`${activeCircleStyles} ${
