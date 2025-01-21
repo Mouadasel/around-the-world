@@ -7,6 +7,7 @@ import ShowMessage from "./components/ShowMessage";
 
 function App() {
   const [countriesList, setCountriesList] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -17,8 +18,8 @@ function App() {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCountriesList(data);
+        setFilteredCountries(data);
       })
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
@@ -32,10 +33,16 @@ function App() {
         {!isLoading && !isError && (
           <>
             <div className="container mx-auto flex flex-col justify-between gap-10 px-5 md:h-14 md:flex-row md:items-center md:gap-0 md:px-0">
-              <SearchInput />
-              <RegionMenu />
+              <SearchInput
+                countriesList={countriesList}
+                filterCountriesList={setFilteredCountries}
+              />
+              <RegionMenu
+                countriesList={countriesList}
+                filterCountriesList={setFilteredCountries}
+              />
             </div>
-            <CountryList data={countriesList} />
+            <CountryList data={filteredCountries} />
           </>
         )}
       </div>
