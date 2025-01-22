@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 const SearchInput = ({ countriesList, filterCountriesList }) => {
   const handleSearch = (e) => {
-    e.preventDefault();
-    const searchTerm = e.target.search.value;
+    console.log(e);
+    const searchTerm = e.target.value;
     const filteredCountries =
       !searchTerm || searchTerm === ""
         ? countriesList
@@ -14,7 +14,7 @@ const SearchInput = ({ countriesList, filterCountriesList }) => {
     filterCountriesList(filteredCountries);
   };
   return (
-    <form className="relative flex-1" onSubmit={handleSearch}>
+    <form className="relative flex-1">
       <div className="absolute left-8 top-5">
         <svg
           width="18"
@@ -32,6 +32,7 @@ const SearchInput = ({ countriesList, filterCountriesList }) => {
         </svg>
       </div>
       <input
+        onChange={handleSearch}
         type="text"
         name="search"
         placeholder="Search..."
